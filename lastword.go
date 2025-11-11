@@ -1,8 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func lastword(s string) string {
+	if s == "" {
+		return ""
+	}
 	end := len(s) - 1
 	for end >= 0 && s[end] == ' ' {
 		end--
@@ -18,5 +23,6 @@ func lastword(s string) string {
 }
 
 func main() {
-	fmt.Println(lastword("Hana ahmed gamal"))
+	fmt.Println(lastword("Hana ahmed gamal  "))
+
 }

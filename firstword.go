@@ -1,12 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func firstWord(s string) string {
 	result := ""
 	flag := false
-	for _, c := range s {
 
+	if s == "" {
+		return ""
+	}
+	if len(os.Args) != 1 {
+		return ""
+	}
+
+	for _, c := range s {
 		if c != ' ' {
 			result += string(c)
 			flag = true

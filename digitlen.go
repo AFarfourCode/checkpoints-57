@@ -10,7 +10,6 @@ func DigitLen(n, base int) int {
 		n = -n
 	}
 	count := 0
-
 	for n > 0 {
 		n = n / base
 		count++

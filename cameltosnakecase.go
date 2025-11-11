@@ -6,17 +6,15 @@ func CamelToSnakeCase(s string) string {
 	if s == "" {
 		return ""
 	}
-
 	for i := 0; i < len(s); i++ {
-		ch := s[i]
-		if !(ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z') {
+		c := s[i]
+
+		if !(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z') {
 			return s
 		}
-
-		if i > 0 && ch >= 'A' && ch <= 'Z' && s[i-1] >= 'A' && s[i-1] <= 'Z' {
+		if i > 0 && c >= 'A' && c <= 'Z' && c >= s[i-1] && c <= s[i-1] {
 			return s
 		}
-
 		last := s[len(s)-1]
 		if last >= 'A' && last <= 'Z' {
 			return s
@@ -24,6 +22,7 @@ func CamelToSnakeCase(s string) string {
 	}
 	result := ""
 	for i := 0; i < len(s); i++ {
+
 		ch := s[i]
 		if i != 0 {
 			if ch >= 'A' && ch <= 'Z' {
@@ -31,7 +30,6 @@ func CamelToSnakeCase(s string) string {
 			}
 		}
 		result += string(ch)
-
 	}
 	return result
 }
