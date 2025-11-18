@@ -1,3 +1,4 @@
+/*
 package main
 
 import (
@@ -53,6 +54,46 @@ func PrintMemory(arr [10]byte) {
 	}
 
 	// Newline after ASCII output
+	fmt.Println()
+}
+
+func main() {
+	// Call PrintMemory with a 10-byte array
+	// The array is partially initialized: {'h','e','l','l','o',16,21,'*'}
+	// The remaining bytes are automatically 0 (Go zero-initializes arrays)
+	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
+}
+*/
+
+package main
+
+import (
+	"fmt" // For printing to console
+	"unicode"
+)
+
+// PrintMemory prints the contents of a 10-byte array in both hexadecimal and ASCII format.
+// Non-printable characters are replaced by '.' in the ASCII output.
+func PrintMemory(arr [10]byte) {
+	for i := 0; i < 10; i++ {
+		fmt.Printf("%02x", arr[i])
+		if i != 9 {
+			fmt.Print(" ")
+		}
+		if i == 3 || i == 7 {
+			fmt.Println()
+		}
+	}
+	fmt.Println()
+
+	for i := 0; i < 10; i++ {
+		r := rune(arr[i])
+		if unicode.IsGraphic(r) {
+			fmt.Printf("%c", r)
+		} else {
+			fmt.Print(".")
+		}
+	}
 	fmt.Println()
 }
 
