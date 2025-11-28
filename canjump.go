@@ -55,27 +55,27 @@ package main
 import "fmt"
 
 func CanJump(s []uint) bool {
-
 	if len(s) == 0 {
 		return false
 	}
 	if len(s) == 1 {
 		return true
 	}
-	maxreach := uint(0)
-	for i := uint(0); i < uint(len(s)); i++ {
-		if i > maxreach {
-			return false
+
+	indx := uint(0)
+	for i := len(s); i > 0; i-- {
+		steps := s[indx]
+		if indx+steps < uint(len(s)-1) {
+			indx = indx + steps
 		}
-		reach := i + s[i]
-		if reach > maxreach {
-			maxreach = reach
-		}
-		if maxreach >= uint(len(s)-1) {
+		if indx+steps == uint(len(s)-1) {
 			return true
 		}
+		if indx+steps > uint(len(s)-1) {
+			break
+		}
 	}
-	return true
+	return false
 }
 
 func main() {
