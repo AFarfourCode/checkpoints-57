@@ -65,41 +65,42 @@ func main() {
 }
 */
 
-package main
+package piscine
 
 import (
-	"fmt" // For printing to console
+	"github.com/01-edu/z01"
 	"unicode"
 )
 
-// PrintMemory prints the contents of a 10-byte array in both hexadecimal and ASCII format.
-// Non-printable characters are replaced by '.' in the ASCII output.
+func printHex(b byte) {
+	hex := "0123456789abcdef"
+	z01.PrintRune(rune(hex[b>>4]))
+	z01.PrintRune(rune(hex[b&0x0F]))
+}
+
 func PrintMemory(arr [10]byte) {
+
 	for i := 0; i < 10; i++ {
-		fmt.Printf("%02x", arr[i])
-		if i != 9 {
-			fmt.Print(" ")
+		printHex(arr[i])
+
+		if i != 9 && i != 3 && i != 7 {
+			z01.PrintRune(' ')
 		}
+
 		if i == 3 || i == 7 {
-			fmt.Println()
+			z01.PrintRune('\n')
 		}
+
 	}
-	fmt.Println()
+	z01.PrintRune('\n')
 
 	for i := 0; i < 10; i++ {
 		r := rune(arr[i])
-		if unicode.IsGraphic(r) {
-			fmt.Printf("%c", r)
+		if r == ' ' || !unicode.IsGraphic(r) {
+			z01.PrintRune('.')
 		} else {
-			fmt.Print(".")
+			z01.PrintRune(r)
 		}
 	}
-	fmt.Println()
-}
-
-func main() {
-	// Call PrintMemory with a 10-byte array
-	// The array is partially initialized: {'h','e','l','l','o',16,21,'*'}
-	// The remaining bytes are automatically 0 (Go zero-initializes arrays)
-	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
+	z01.PrintRune('\n')
 }
