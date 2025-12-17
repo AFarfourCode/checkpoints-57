@@ -2,29 +2,37 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"os"
 )
 
-// Function to process each word in the input string
-func reverseStrCap(input string) string {
-	words := strings.Fields(input) // Split the string into words
-	var result []string
-
-	// Process each word
-	for _, word := range words {
-		if len(word) > 0 {
-			// Convert the whole word to lowercase
-			word = strings.ToLower(word)
-			// Capitalize the last letter
-			word = word[:len(word)-1] + strings.ToUpper(string(word[len(word)-1]))
+func reverseStrCap(s string) string {
+	r := []rune(s)
+	for i := 0; i < len(r); i++ {
+		if r[i] != ' ' && (i == len(r)-1 || r[i+1] == ' ') {
+			if r[i] >= 'a' && r[i] <= 'z' {
+				r[i] -= 32
+			}
+		} else {
+			if r[i] >= 'A' && r[i] <= 'Z' {
+				r[i] += 32
+			}
 		}
-		result = append(result, word)
 	}
-
-	// Join the words back into a single string and return it
-	return strings.Join(result, " ")
+	return string(r)
 }
 
 func main() {
-	fmt.Println(reverseStrCap("First SMALL TesT"))
+	if len(os.Args) < 2 {
+		return
+	}
+
+	args := os.Args[1:]
+
+	for i, arg := range args {
+		if i > 0 {
+			fmt.Print(" ")
+		}
+		fmt.Print(reverseStrCap(arg))
+	}
+	fmt.Println()
 }
