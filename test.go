@@ -16,5 +16,5 @@ func HighAndLow(in string) string {
 		}
 	}
 
-	return "throw towel"
+	return
 }
